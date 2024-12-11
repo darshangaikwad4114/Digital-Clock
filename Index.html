@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Clock</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+    }
+
+    .clock-container {
+      text-align: center;
+      padding: 20px 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h1 {
+      font-size: 64px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="clock-container">
+    <h1 id="clock">00:00:00 AM</h1>
+    <p>Stay on time and inspired ✨</p>
+  </div>
+
+  <script>
+    const updateClock = () => {
+      const clockElement = document.getElementById("clock");
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      const amPm = hours >= 12 ? "PM" : "AM";
+
+      // Convert to 12-hour format
+      hours = hours % 12 || 12;
+
+      // Format with leading zeroes
+      const formattedHours = hours < 10 ? `0${hours}` : hours;
+      const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+      const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+      // Display time
+      clockElement.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds} ${amPm}`;
+    };
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
